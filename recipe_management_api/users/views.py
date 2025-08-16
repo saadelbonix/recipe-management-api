@@ -1,0 +1,1 @@
+# RegisterView class here

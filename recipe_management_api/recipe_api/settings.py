@@ -1,0 +1,1 @@
+# Django settings placeholder (full code to be inserted)
