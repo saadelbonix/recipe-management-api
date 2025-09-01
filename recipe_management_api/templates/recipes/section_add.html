@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load form_extras %}
+{% block content %}
+<h1 class="h4 mb-2">Add Recipe</h1>
+<ul class="nav nav-pills mb-3 gap-2">
+  <li class="nav-item"><a class="nav-link" href="{% url 'dashboard_show_all' %}">Show All</a></li>
+  <li class="nav-item"><a class="nav-link active" href="{% url 'dashboard_add' %}">Add</a></li>
+  <li class="nav-item"><a class="nav-link" href="{% url 'dashboard_modify' %}">Modify</a></li>
+  <li class="nav-item"><a class="nav-link" href="{% url 'dashboard_delete' %}">Delete</a></li>
+</ul>
+<div class="card shadow-sm">
+  <div class="card-body">
+    <form method="post" enctype="multipart/form-data" novalidate>
+      {% csrf_token %}
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label">Title</label>
+          {{ form.title|add_class:"form-control" }}
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Category</label>
+          {{ form.category|add_class:"form-control" }}
+        </div>
+        <div class="col-12">
+          <label class="form-label">Ingredients</label>
+          {{ form.ingredients|add_class:"form-control" }}
+        </div>
+        <div class="col-12">
+          <label class="form-label">Steps</label>
+          {{ form.steps|add_class:"form-control" }}
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Image (optional)</label>
+          {{ form.image|add_class:"form-control" }}
+        </div>
+        <div class="col-12">
+          <label class="form-label">Description</label>
+          {{ form.description|add_class:"form-control" }}
+        </div>
+      </div>
+      <div class="d-flex gap-2 mt-3">
+        <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary">Cancel</a>
+        <button class="btn btn-primary">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="h4 mb-3">Dashboard</h1>
+<div class="row g-3">
+  <div class="col-12 col-md-6 col-lg-3">
+    <a href="{% url 'dashboard_show_all' %}" class="text-decoration-none">
+      <div class="card shadow-sm h-100 action-card">
+        <div class="card-body text-center py-5">
+          <div class="display-6 mb-2">📖</div>
+          <div class="fw-semibold">Show All Recipes</div>
+          <div class="text-muted small">{{ recipes|length }} total</div>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="col-12 col-md-6 col-lg-3">
+    <a href="{% url 'dashboard_add' %}" class="text-decoration-none">
+      <div class="card shadow-sm h-100 action-card">
+        <div class="card-body text-center py-5">
+          <div class="display-6 mb-2">➕</div>
+          <div class="fw-semibold">Add Recipe</div>
+          <div class="text-muted small">Post a new one</div>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="col-12 col-md-6 col-lg-3">
+    <a href="{% url 'dashboard_modify' %}" class="text-decoration-none">
+      <div class="card shadow-sm h-100 action-card">
+        <div class="card-body text-center py-5">
+          <div class="display-6 mb-2">✏️</div>
+          <div class="fw-semibold">Modify Recipe</div>
+          <div class="text-muted small">Edit existing</div>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="col-12 col-md-6 col-lg-3">
+    <a href="{% url 'dashboard_delete' %}" class="text-decoration-none">
+      <div class="card shadow-sm h-100 action-card">
+        <div class="card-body text-center py-5">
+          <div class="display-6 mb-2">🗑️</div>
+          <div class="fw-semibold">Delete Recipe</div>
+          <div class="text-muted small">Remove items</div>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
+{% endblock %}

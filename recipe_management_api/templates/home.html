@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card shadow-sm">
+        <div class="card-body p-4">
+          <h1 class="h3 mb-3">Recipe Management API</h1>
+          <p class="text-secondary">A clean REST backend for recipes: register, login, create/update/delete, filter by category or ingredient.</p>
+          <hr>
+          <h2 class="h5">Quick links</h2>
+          <ul>
+            <li><a href="/api/docs/">Swagger UI</a></li>
+            <li><code>POST /register/</code> – create user</li>
+            <li><code>POST /login/</code> – obtain JWT tokens</li>
+            <li><code>GET /recipes/</code>, <code>POST /recipes/</code>, <code>PUT /recipes/&lt;id&gt;/</code>, <code>DELETE /recipes/&lt;id&gt;/</code></li>
+            <li>Filters: <code>?ingredient=egg</code>, <code>?category=dessert</code></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,76 @@
+<div class="card shadow-sm rounded-4 overflow-hidden">
+  <div class="table-responsive">
+    <table class="table align-middle mb-0">
+      <thead class="table-light">
+        <tr>
+          <th>Image</th>
+          <th>Title</th>
+          <th>Category</th>
+          <th>Created</th>
+          {% if show_actions %}<th class="text-end">Actions</th>{% endif %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in recipes %}
+        <tr>
+          <td style="width:80px">
+            {% if r.image %}
+              <img src="{{ r.image.url }}" alt="" class="img-thumbnail" style="max-height:60px;object-fit:cover;">
+            {% else %}
+              <span class="text-muted small">No image</span>
+            {% endif %}
+          </td>
+          <td class="fw-medium">{{ r.title }}</td>
+          <td>{{ r.category }}</td>
+          <td class="text-muted small">{{ r.created_at|date:"Y-m-d H:i" }}</td>
+
+          {% if show_actions %}
+            {% if show_actions == 'edit' %}
+              <td class="text-end">
+                <a class="btn btn-sm btn-outline-secondary" href="{% url 'recipe_edit' r.pk %}">Edit</a>
+              </td>
+            {% elif show_actions == 'delete' %}
+              <td class="text-end">
+                <a class="btn btn-sm btn-outline-danger" href="{% url 'recipe_delete' r.pk %}">Delete</a>
+              </td>
+            {% else %}
+              <td class="text-end">
+                <a class="btn btn-sm btn-outline-secondary" href="{% url 'recipe_edit' r.pk %}">Edit</a>
+                <a class="btn btn-sm btn-outline-danger" href="{% url 'recipe_delete' r.pk %}">Delete</a>
+              </td>
+            {% endif %}
+          {% endif %}
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="{% if show_actions %}5{% else %}4{% endif %}" class="text-center text-muted py-4">
+            No recipes found.
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  {% if is_paginated %}
+  <div class="card-footer bg-white">
+    <nav>
+      <ul class="pagination mb-0">
+        {% if page_obj.has_previous %}
+          <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Previous</a></li>
+        {% else %}
+          <li class="page-item disabled"><span class="page-link">Previous</span></li>
+        {% endif %}
+
+        <li class="page-item disabled"><span class="page-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span></li>
+
+        {% if page_obj.has_next %}
+          <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Next</a></li>
+        {% else %}
+          <li class="page-item disabled"><span class="page-link">Next</span></li>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>
+  {% endif %}
+</div>

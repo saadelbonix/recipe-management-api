@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container py-5">
+
+  <!-- Four Section Tiles -->
+  <div class="row g-3 mb-4">
+    <!-- Section 1: Show all recipes -->
+    <div class="col-12 col-md-6 col-xl-3">
+      <a href="{% url 'dashboard_show_all' %}" class="text-decoration-none">
+        <div class="card h-100 shadow-sm border-0 tile-cta">
+          <div class="card-body d-flex flex-column align-items-start">
+            <div class="display-6 mb-2">📋</div>
+            <h2 class="h5 mb-1">Show All Recipes</h2>
+            <p class="text-muted mb-3 small">Browse everything you created.</p>
+            <span class="btn btn-outline-primary btn-sm">Open</span>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Section 2: Add recipe -->
+    <div class="col-12 col-md-6 col-xl-3">
+      <a href="{% url 'recipe_create' %}" class="text-decoration-none">
+        <div class="card h-100 shadow-sm border-0 tile-cta">
+          <div class="card-body d-flex flex-column align-items-start">
+            <div class="display-6 mb-2">➕</div>
+            <h2 class="h5 mb-1">Add Recipe</h2>
+            <p class="text-muted mb-3 small">Create a new recipe entry.</p>
+            <span class="btn btn-outline-success btn-sm">Create</span>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Section 3: Edit recipe -->
+    <div class="col-12 col-md-6 col-xl-3">
+      <a href="{% url 'dashboard_modify' %}" class="text-decoration-none">
+        <div class="card h-100 shadow-sm border-0 tile-cta">
+          <div class="card-body d-flex flex-column align-items-start">
+            <div class="display-6 mb-2">✏️</div>
+            <h2 class="h5 mb-1">Edit Recipe</h2>
+            <p class="text-muted mb-3 small">Pick a recipe below to edit.</p>
+            <span class="btn btn-outline-warning btn-sm">Go to list</span>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Section 4: Remove recipe -->
+    <div class="col-12 col-md-6 col-xl-3">
+      <a href="{% url 'dashboard_delete' %}" class="text-decoration-none">
+        <div class="card h-100 shadow-sm border-0 tile-cta">
+          <div class="card-body d-flex flex-column align-items-start">
+            <div class="display-6 mb-2">🗑️</div>
+            <h2 class="h5 mb-1">Remove Recipe</h2>
+            <p class="text-muted mb-3 small">Delete an existing recipe.</p>
+            <span class="btn btn-outline-danger btn-sm">Go to list</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Combined List with anchors for the 3 list-driven sections -->
+  <div class="card shadow-sm border-0" id="all">
+    <div class="card-body">
+      <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
+        <h3 class="h6 mb-0">All Recipes</h3>
+        <form method="get" class="ms-auto" role="search">
+          <div class="input-group input-group-sm" style="max-width: 360px;">
+            <input class="form-control" type="search" name="q" value="{{ request.GET.q }}" placeholder="Search title or ingredients">
+            <button class="btn btn-primary" type="submit">Search</button>
+          </div>
+        </form>
+      </div>
+
+      {% if recipes %}
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="table-light">
+            <tr>
+              <th scope="col">Title</th>
+              <th scope="col" class="d-none d-md-table-cell">Category</th>
+              <th scope="col" class="d-none d-lg-table-cell">Created</th>
+              <th scope="col" class="text-end">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for recipe in page_obj %}
+            <tr id="edit">
+              <td class="fw-medium">{{ recipe.title }}</td>
+              <td class="d-none d-md-table-cell"><span class="badge text-bg-light border">{{ recipe.category }}</span></td>
+              <td class="d-none d-lg-table-cell">{{ recipe.created_at|date:"M d, Y H:i" }}</td>
+              <td class="text-end">
+                <a href="{% url 'recipe_edit' recipe.id %}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                <span class="btn btn-outline-danger btn-sm">Go to list</span>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      {% if is_paginated %}
+      <nav class="mt-3">
+        <ul class="pagination pagination-sm mb-0">
+          {% if page_obj.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Prev</a></li>
+          {% else %}
+            <li class="page-item disabled"><span class="page-link">Prev</span></li>
+          {% endif %}
+
+          <li class="page-item disabled"><span class="page-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span></li>
+
+          {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Next</a></li>
+          {% else %}
+            <li class="page-item disabled"><span class="page-link">Next</span></li>
+          {% endif %}
+        </ul>
+      </nav>
+      {% endif %}
+
+      {% else %}
+        <p class="text-muted mb-0">No recipes found.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

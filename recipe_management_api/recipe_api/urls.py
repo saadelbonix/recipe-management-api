@@ -1,1 +1,0 @@
-# URL configuration placeholder (full code to be inserted)

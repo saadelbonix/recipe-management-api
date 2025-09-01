@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="h4 mb-2">Show All Recipes</h1>
+<ul class="nav nav-pills mb-3 gap-2">
+  <li class="nav-item"><a class="nav-link active" href="{% url 'dashboard_show_all' %}">Show All</a></li>
+  <li class="nav-item"><a class="nav-link" href="{% url 'dashboard_add' %}">Add</a></li>
+  <li class="nav-item"><a class="nav-link" href="{% url 'dashboard_modify' %}">Modify</a></li>
+  <li class="nav-item"><a class="nav-link" href="{% url 'dashboard_delete' %}">Delete</a></li>
+</ul>
+{% include "recipes/_list_table.html" with recipes=recipes show_actions=False %}
+{% endblock %}

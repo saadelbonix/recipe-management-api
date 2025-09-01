@@ -1,0 +1,44 @@
+body { font-feature-settings: 'liga' 1; }
+.card { border-radius: 1rem; }
+.navbar-brand { letter-spacing: 0.5px; }
+code { background: #f8f9fa; padding: .2rem .4rem; border-radius: .25rem; }
+
+
+/* Auth card visual side */
+.auth-wrapper { min-height: 70vh; }
+.auth-card { border: 0; background: var(--bs-body-bg); }
+.auth-visual {
+  background: radial-gradient(1200px 600px at -10% -10%, #6ea8fe 0%, rgba(13,110,253,.9) 35%, #0a58ca 100%);
+  color: #fff;
+  position: relative;
+  border-right: 1px solid rgba(255,255,255,.2);
+}
+.auth-visual::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" opacity="0.08" viewBox="0 0 100 100"><defs><pattern id="g" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M0 10 L10 0" stroke="white" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(%23g)"/></svg>') center/cover no-repeat;
+  pointer-events: none;
+}
+.table > :not(caption) > * > * { vertical-align: middle; }
+.badge { font-weight: 500; }
+
+
+.action-card { border: 0; transition: transform .12s ease, box-shadow .12s ease; }
+.action-card:hover { transform: translateY(-2px); box-shadow: 0 .5rem 1rem rgba(0,0,0,.1) !important; }
+
+
+/* Dashboard KPI card */
+.kpi-card{
+  border-radius: 1rem;
+  padding: 1rem 1.25rem;
+  background: linear-gradient(180deg, #ffffff, #f8f9fa);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.kpi-card .kpi-label{ font-size:.8rem; text-transform:uppercase; letter-spacing:.08em; color:#6c757d; }
+.kpi-card .kpi-value{ font-size:1.75rem; font-weight:800; line-height:1.1; }
+.kpi-card .kpi-sub{ font-size:.8rem; color:#6c757d; }
+
+
+/* Four-section tiles */
+.tile-cta { transition: transform .12s ease, box-shadow .12s ease; border-radius: 1rem; }
+.tile-cta:hover { transform: translateY(-2px); box-shadow: 0 .5rem 1rem rgba(0,0,0,.08)!important; }
